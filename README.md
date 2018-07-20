@@ -20,10 +20,10 @@
 必须要添加在`settings.py`的内容
 ```
 # 启用Kafka调度存储请求队列
-SCHEDULER = "scrapy_kafka.scheduler.Scheduler"
+SCHEDULER = "scrapy_kafka_redis.scheduler.Scheduler"
 
 # 使用BloomFilter作为去重队列
-DUPEFILTER_CLASS = "scrapy_kafka.dupefilter.BloomFilter"
+DUPEFILTER_CLASS = "scrapy_kafka_redis.dupefilter.BloomFilter"
 ```
 
 其他可选参数的默认值
