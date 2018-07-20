@@ -15,7 +15,7 @@
  - kafka-python >= 1.4.0
 
 ### 使用
-  - ``
+  - `pip install scrapy-kafka-redis`
   - 配置`settings.py`
 必须要添加在`settings.py`的内容
 ```
