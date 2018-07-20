@@ -17,9 +17,9 @@ REDIS_PARAMS = {
 }
 
 SCHEDULER_QUEUE_TOPIC = '%(spider)s-requests'
-SCHEDULER_QUEUE_CLASS = 'scrapy_kafka.queue.KafkaQueue'
+SCHEDULER_QUEUE_CLASS = 'scrapy_kafka_redis.queue.KafkaQueue'
 SCHEDULER_DUPEFILTER_KEY = '%(spider)s:dupefilter'
-SCHEDULER_DUPEFILTER_CLASS = 'scrapy_kafka.dupefilter.BloomFilter'
+SCHEDULER_DUPEFILTER_CLASS = 'scrapy_kafka_redis.dupefilter.BloomFilter'
 
 
 START_URLS_TOPIC = '%(name)s-start_urls'

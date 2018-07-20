@@ -44,11 +44,11 @@ REDIS_PARAMS = {
 # 调度队列的默认TOPIC
 SCHEDULER_QUEUE_TOPIC = '%(spider)s-requests'
 # 默认使用的调度队列
-SCHEDULER_QUEUE_CLASS = 'scrapy_kafka.queue.KafkaQueue'
+SCHEDULER_QUEUE_CLASS = 'scrapy_kafka_redis.queue.KafkaQueue'
 # 去重队列在redis中存储的key名
 SCHEDULER_DUPEFILTER_KEY = '%(spider)s:dupefilter'
 # 调度器使用的去重算法
-SCHEDULER_DUPEFILTER_CLASS = 'scrapy_kafka.dupefilter.BloomFilter'
+SCHEDULER_DUPEFILTER_CLASS = 'scrapy_kafka_redis.dupefilter.BloomFilter'
 # BloomFilter的块个数
 BLOOM_BLOCK_NUM = 1
 
@@ -77,7 +77,7 @@ KAFKA_START_URLS_CONSUMER_PARAMS = {
 - `spiders` 使用
 ```
 import scrapy
-from scrapy_kafka.spiders import KafkaSpider
+from scrapy_kafka_redis.spiders import KafkaSpider
 
 class DemoSpider(KafkaSpider):
     name = "demo"
@@ -90,6 +90,10 @@ class DemoSpider(KafkaSpider):
 ./bin/kafka-topics.sh --create --zookeeper localhost:2181 --partitions 3 --replication-factor 1 --topic demo-start_urls
 
 ./bin/kafka-topics.sh --create --zookeeper localhost:2181 --partitions 3 --replication-factor 1 --topic demo-requests
+```
+- 发送消息
+```
+./bin/kafka-console-producer.sh --broker-list localhost:9092 --topic demo-start_urls
 ```
 建议手动创建Topic并指定分区数
 
