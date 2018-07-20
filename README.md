@@ -71,7 +71,7 @@ KAFKA_REQUEST_CONSUMER_PARAMS = {
 KAFKA_START_URLS_CONSUMER_PARAMS = {
     'group_id': 'start_url',
     'api_version': (0, 10, 1),
-    'value_deserializer': loads
+    'value_deserializer': lambda m: m.decode('utf-8'),
 }
 ```
 - `spiders` 使用
