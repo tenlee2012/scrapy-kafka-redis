@@ -1,4 +1,4 @@
-# Scrpay-Kafka
+# Scrpay-Kafka-Redis
 在有大量请求堆积的情况下，即使用了`Bloomfilter`算法，使用[scrapy-redis](https://github.com/rmax/scrapy-redis)仍然会占用大量内存，本项目参考`scrapy-redis`，
 ### 特点
  - 支持分布式
