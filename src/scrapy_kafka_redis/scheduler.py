@@ -8,7 +8,7 @@ from . import connection, defaults
 
 class Scheduler(object):
 
-    def __init__(self, redis_server, producer: KafkaProducer, consumer: KafkaConsumer,
+    def __init__(self, redis_server, settings,
                  persist=False,
                  flush_on_start=False,
                  queue_key=defaults.SCHEDULER_QUEUE_TOPIC,
@@ -16,8 +16,9 @@ class Scheduler(object):
                  dupefilter_key=defaults.SCHEDULER_DUPEFILTER_KEY,
                  dupefilter_cls=defaults.SCHEDULER_DUPEFILTER_CLASS,
                  idle_before_close=0):
-        self.producer = producer
-        self.consumer = consumer
+        self.producer = None
+        self.consumer = None
+        self.settings = settings
         self.redis_server = redis_server
         self.persist = persist
         self.flush_on_start = flush_on_start
@@ -45,7 +46,6 @@ class Scheduler(object):
             'queue_key': 'SCHEDULER_QUEUE_TOPIC',
             'queue_cls': 'SCHEDULER_QUEUE_CLASS',
             'dupefilter_key': 'SCHEDULER_DUPEFILTER_KEY',
-            'dupefilter_cls': 'DUPEFILTER_CLASS',
         }
         for name, setting_name in optional.items():
             val = settings.get(setting_name)
@@ -55,10 +55,8 @@ class Scheduler(object):
         redis_server = connection.get_redis_from_settings(settings)
         # 确定Redis连接有效
         redis_server.ping()
-        producer = connection.get_request_producer_from_settings(settings)
-        consumer = connection.get_request_consumer_from_settings(settings)
 
-        return cls(redis_server=redis_server, producer=producer, consumer=consumer, **kwargs)
+        return cls(redis_server=redis_server, settings=settings, **kwargs)
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -68,6 +66,8 @@ class Scheduler(object):
 
     def open(self, spider):
         self.spider = spider
+        self.producer = connection.get_request_producer_from_settings(self.settings)
+        self.consumer = connection.get_request_consumer_from_settings(spider.name, self.settings)
 
         try:
             self.queue = load_object(self.queue_cls)(

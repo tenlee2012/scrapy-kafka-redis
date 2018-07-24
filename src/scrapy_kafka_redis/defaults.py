@@ -26,17 +26,17 @@ START_URLS_TOPIC = '%(name)s-start_urls'
 BLOOM_BLOCK_NUM = 1
 
 KAFKA_BOOTSTRAP_SERVERS = None
+KAFKA_REQUEST_GROUP = '%(spider)s-requests-0'
+KAFKA_START_GROUP = '%(spider)s-start-0'
 KAFKA_REQUEST_PRODUCER_PARAMS = {
     'api_version': (0, 10, 1),
     'value_serializer': dumps
 }
 KAFKA_REQUEST_CONSUMER_PARAMS = {
-    'group_id': 'requests',
     'api_version': (0, 10, 1),
     'value_deserializer': loads
 }
 KAFKA_START_URLS_CONSUMER_PARAMS = {
-    'group_id': 'start_url',
     'api_version': (0, 10, 1),
     'value_deserializer': lambda m: m.decode('utf-8'),
 }

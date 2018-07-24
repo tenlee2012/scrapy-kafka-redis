@@ -55,7 +55,7 @@ class KafkaMixin(object):
                          "(batch size: %(kafka_batch_size)s",
                          self.__dict__)
 
-        self.consumer = connection.get_start_urls_consumer_from_settings(crawler.settings)
+        self.consumer = connection.get_start_urls_consumer_from_settings(self.name, crawler.settings)
         self.consumer.subscribe(self.kafka_topic)
         # The idle signal is called when the spider has no requests left,
         # that's when we will schedule new requests from redis queue
