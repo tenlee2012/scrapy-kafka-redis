@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name='scrapy-kafka-redis',
-    version='0.0.5',
+    version='0.0.7',
     description="Kafka and Redis based components for Scrapy.",
     author="tenlee",
     author_email='tenlee2012@163.com',
