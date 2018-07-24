@@ -13,7 +13,7 @@ class Base(object):
         self.consumer = consumer
         self.consumer.subscribe(topic)
         self.spider = spider
-        self.topic = topic % {'spider': spider.name}
+        self.topic = topic
 
     def _encode_request(self, request):
         """Encode a request object"""

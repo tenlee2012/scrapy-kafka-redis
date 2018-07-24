@@ -66,7 +66,7 @@ def get_redis_from_settings(settings):
 def get_start_urls_consumer_from_settings(spider_name: str, settings: Settings) -> KafkaConsumer:
     bootstrap_servers = settings.get('KAFKA_BOOTSTRAP_SERVERS', defaults.KAFKA_BOOTSTRAP_SERVERS)
     kafka_params = settings.get('KAFKA_START_URLS_CONSUMER_PARAMS', defaults.KAFKA_START_URLS_CONSUMER_PARAMS)
-    kafka_start_group = settings.get('KAFKA_START_GROUP', defaults.KAFKA_REQUEST_GROUP)
+    kafka_start_group = settings.get('KAFKA_START_GROUP', defaults.KAFKA_START_GROUP)
     kafka_params['group_id'] = kafka_start_group % {'spider': spider_name}
     consumer = KafkaConsumer(bootstrap_servers=bootstrap_servers, **kafka_params)
     return consumer
