@@ -66,13 +66,11 @@ KAFKA_REQUEST_PRODUCER_PARAMS = {
 }
 # Constructing a Kafka consumer of the request queue
 KAFKA_REQUEST_CONSUMER_PARAMS = {
-    'group_id': 'requests',
     'api_version': (0, 10, 1),
     'value_deserializer': loads
 }
 # Constructing a Kafka consumer in the start queue
 KAFKA_START_URLS_CONSUMER_PARAMS = {
-    'group_id': 'start_url',
     'api_version': (0, 10, 1),
     'value_deserializer': lambda m: m.decode('utf-8'),
 }
