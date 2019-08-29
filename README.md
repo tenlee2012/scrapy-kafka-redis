@@ -8,14 +8,14 @@ In the case of a large number of requests, even using the `Bloomfilter` algorith
  - Use Kafka as a request queue, Can support a large number of request stacks, capacity and disk size related, rather than running memory
  - Due to the feature of Kafka, priority queues are not supported, only FIFO queues are supported.
  
-### 依赖
+### Dependencies
  - Python 3.0+
  - Redis >= 2.8
  - Scrapy >= 1.5
  - kafka-python >= 1.4.0
  - kafka <= 1.1.0 (Since [kafka-python](https://github.com/dpkp/kafka-python) only supports kafka-1.1.0 version)
 
-### 使用
+### How to Use
   - `pip install scrapy-kafka-redis`
   - Configuration `settings.py` file
 Must add param in `settings.py` file
