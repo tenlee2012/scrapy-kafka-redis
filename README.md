@@ -1,4 +1,4 @@
-[中文文档](README_zh.md)
+[中文文档](README_zh.md) | 
 [English](README.md)
 # Scrpay-Kafka-Redis
 In the case of a large number of requests, even using the `Bloomfilter` algorithm, but using [scrapy-redis] (https://github.com/rmax/scrapy-redis) still consumes a lot of memory. This project refers to `scrapy- Redis`.
